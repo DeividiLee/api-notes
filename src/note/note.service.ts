@@ -1,14 +1,24 @@
 import { Injectable } from '@nestjs/common';
 import { CreateNoteDto } from './dto/create-note.dto';
 import { UpdateNoteDto } from './dto/update-note.dto';
-import { NoteInterface } from 'note.interface.ts';
+import { NoteInterface } from './note.interface';
+import { randomUUID } from 'crypto';
 
 @Injectable()
 export class NoteService {
   private notes:NoteInterface[] = []
   create(newDto: CreateNoteDto) {
-    this.notes.push(newDto)
-    return 'This action adds a new note';
+
+    const newNote: NoteInterface = {
+      id: randomUUID(),
+      title: newDto.title,
+      content: newDto.content,
+      createdAt: new Date(),
+    }
+
+    this.notes.push(newNote)
+    return newNote
+
   }
 
   findAll() {
