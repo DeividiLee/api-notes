@@ -19,7 +19,7 @@ export class NoteController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.noteService.findOne(+id);
+    return this.noteService.findOne(id);
   }
 
   @Patch(':id')
